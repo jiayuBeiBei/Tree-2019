@@ -24,13 +24,7 @@ public class Main {
     }
     Node root=null;
     public int add(int val){
-        if(root==null){
-            root=new Node(val);
-        }else{
-            //层序查找完全二叉树,返回要加的子节点位置的指针
-            Node last=findBTreeLastNode(root);
-            last=new Node(val);
-        }
+   
         return 0;
     }
     public int remove(){
