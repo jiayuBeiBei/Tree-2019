@@ -23,21 +23,43 @@ public class Main {
         //判断俩个节点想不想等,是一个比较复杂的问题,因为一个节点的子树可能有很多层
     }
     Node root=null;
-    public int add(int val){
-   
+    public int add(Node croot,int val){
+        if (croot==null){
+            croot = new Node(val);
+            return 0;
+        }else {
+
+            if (croot.val>val){
+                add(croot.left,val);
+            }else{
+                add(croot.right,val);
+            }
+        }
         return 0;
     }
-    public int remove(){
+    public int remove(Node croot,int val){
+        if (croot==null){
+
+            return 1;
+        }else {
+            if (croot.val==val) {
+                //删除之后的改动
+            }else if (croot.val>val){
+                remove(croot.left,val);
+            }else{
+                remove(croot.right,val);
+            }
+        }
         return 0; 
     }
 
     public static void main(String[] args) {
         Main tree=new Main();
-            tree.add(0);
-            tree.add(1);
-            tree.add(2);
-            tree.add(3);
-            tree.remove();
+//            tree.add(0);
+//            tree.add(1);
+//            tree.add(2);
+//            tree.add(3);
+//            tree.remove();
         System.out.println("Hello World!");
     }
 }
