@@ -33,8 +33,6 @@ public class Main {
         }
         return 0;
     }
-
-
     private Node findBTreeLastNode(Node root){
         //层序查找完全二叉树要加的子节点的位置
         List<Node> queue=new LinkedList();
@@ -56,13 +54,28 @@ public class Main {
         }
         return null;//未知错
     }
+    private int preOrder(Node root){
+        List<Node> stack=new LinkedList<>();
+        Node p=root;
+        while(p!=null||!stack.isEmpty()){
+            while(p!=null){
+                stack.add(p);
+                System.out.println(p.val);
+                p=p.left;
+            }
+            if (!stack.isEmpty()){
+
+            }
+
+        }
+        return 0;
+    }
     public static void main(String[] args) {
         Main tree=new Main();
             tree.add(0);
             tree.add(1);
             tree.add(2);
             tree.add(3);
-
         System.out.println("Hello World!");
     }
 }
