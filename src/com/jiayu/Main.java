@@ -44,6 +44,9 @@ public class Main {
         }else {
             if (croot.val==val) {
                 //删除之后的改动
+                //层序,找到左子树最大值
+                //返回改造好的根节点,把此处croot的右节点加入进来,把返回改造好的根节点挂在父节点下
+
             }else if (croot.val>val){
                 remove(croot.left,val);
             }else{
@@ -52,7 +55,34 @@ public class Main {
         }
         return 0; 
     }
+    private Node levelOrderRemoveLeftTreeMaxVal(Node croot){
+        List<Node> que=new LinkedList<Node>();
+        que.add(croot);
+        Node temp=null;
 
+        Node maxNode=croot;
+        while(que.size()!=0){
+            temp=que.remove(0);
+            if (temp!=null){
+                if (temp.val>maxNode.val){
+                    maxNode=temp;
+                }
+            }
+            if (temp.left!=null){
+                que.add(temp.left);
+            }
+            if (temp.right!=null){
+                que.add(temp.right);
+            }
+
+        }
+
+        if (maxNode.left==null&&maxNode.right==null){
+            return maxNode;
+        }
+
+        return maxNode;
+    }
     public static void main(String[] args) {
         Main tree=new Main();
 //            tree.add(0);
