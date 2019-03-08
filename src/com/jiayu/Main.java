@@ -1,6 +1,7 @@
+package com.jiayu;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 public class Main {
     public class Node{
@@ -32,37 +33,8 @@ public class Main {
         }
         return 0;
     }
-    public int remove(){
-//      层序查找完全二叉树,返回要删除的子节点位置的指针
-        Node last=removeBTreeLastNode(root);
-        if (last.right!=null){
-            last.right=null;
-        }else {
-            last.left=null;
-        }
-        return 0;
-    }
-    private Node removeBTreeLastNode(Node root){
-        //层序查找完全二叉树要加的子节点的位置
-        List<Node> queue=new LinkedList();
-        queue.add(root);
-        Node temp=null;
-        while(!queue.isEmpty()){
-            temp=queue.remove(0);
-            if (temp==null){return null;}//根本没结点
-            if (temp.left!=null){
-                queue.add(temp.left);
-            }else{
-                return temp;
-            }
-            if (temp.right!=null){
-                queue.add(temp.right);
-            }else {
-                return temp;
-            }
-        }
-        return null;//未知错
-    }
+
+
     private Node findBTreeLastNode(Node root){
         //层序查找完全二叉树要加的子节点的位置
         List<Node> queue=new LinkedList();
@@ -90,7 +62,7 @@ public class Main {
             tree.add(1);
             tree.add(2);
             tree.add(3);
-            tree.remove();
+
         System.out.println("Hello World!");
     }
 }
