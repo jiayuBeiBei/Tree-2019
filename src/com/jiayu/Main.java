@@ -23,47 +23,21 @@ public class Main {
         //判断俩个节点想不想等,是一个比较复杂的问题,因为一个节点的子树可能有很多层
     }
     Node root=null;
-    public int add(int val){
-        if(root==null){
-            root=new Node(val);
-        }else{
-            //层序查找完全二叉树,返回要加的子节点位置的指针
-            Node last=findBTreeLastNode(root);
-            last=new Node(val);
-        }
-        return 0;
-    }
-    private Node findBTreeLastNode(Node root){
-        //层序查找完全二叉树要加的子节点的位置
-        List<Node> queue=new LinkedList();
-        queue.add(root);
-        Node temp=null;
-        while(!queue.isEmpty()){
-            temp=queue.remove(0);
-            if (temp==null){return null;}//根本没结点
-            if (temp.left!=null){
-                queue.add(temp.left);
-            }else{
-                return temp.left;
-            }
-            if (temp.right!=null){
-                queue.add(temp.right);
-            }else {
-                return temp.right;
-            }
-        }
-        return null;//未知错
-    }
-    private int preOrder(Node root){
+
+
+    private int preOrder(){
         List<Node> stack=new LinkedList<>();
-        Node p=root;
+        Node p=this.root;
         while(p!=null||!stack.isEmpty()){
             while(p!=null){
+                System.out.println(p.val);
                 stack.add(p);
                 System.out.println(p.val);
                 p=p.left;
             }
             if (!stack.isEmpty()){
+                    Node temp=stack.remove(stack.size()-1);
+                    p=temp.right;
 
             }
 
@@ -76,6 +50,7 @@ public class Main {
             tree.add(1);
             tree.add(2);
             tree.add(3);
+            tree.preOrder();
         System.out.println("Hello World!");
     }
 }
