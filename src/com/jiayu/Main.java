@@ -28,6 +28,20 @@ public class Main {
         }
         return 0;
     }
+    //第二种方法
+    private int preOrder2(Node root){
+        List<Node> stack=new LinkedList<Node>();
+        Node point=root;
+        ((LinkedList<Node>) stack).push(point);
+        while(!stack.isEmpty()){
+            Node temp=((LinkedList<Node>) stack).pop();
+            System.out.println(temp.val);
+            if(temp.right!=null) {((LinkedList<Node>) stack).push(temp.right);}
+            if (temp.left!=null){((LinkedList<Node>) stack).push(temp.left);}
+        }
+
+        return 0;
+    }
     private int inOrder(Node root){
         List<Node> stack=new LinkedList<>();
         Node p=root;
@@ -73,7 +87,26 @@ public class Main {
             root=root.right;
         }
     }
-
+    private int postOrder(Node root){
+        List<Node> stack=new LinkedList<Node>();
+        List<Node> stack2=new LinkedList<Node>();
+        Node point=root;
+        ((LinkedList<Node>)stack).push(point);
+        while(!stack.isEmpty()){
+            Node temp=((LinkedList<Node>)stack).pop();
+            ((LinkedList<Node>) stack2).push(temp);
+            if (temp.left!=null){
+                ((LinkedList<Node>) stack).push(temp.left);
+            }
+            if (temp.right!=null){
+                ((LinkedList<Node>) stack).push(temp.right);
+            }
+        }
+        while(!stack2.isEmpty()){
+            System.out.println(((LinkedList<Node>) stack2).pop().val);
+        }
+        return 0;
+    }
     public static void main(String[] args) {
         Main tree=new Main();
        Node root=new Node(1);
@@ -83,11 +116,16 @@ public class Main {
        root.setLeft(croot2);
        root.setRight(croot3);
        croot3.setLeft(croot4);
+        System.out.println("-------------pre1");
         tree.preOrder(root);
-        System.out.println("---------mid");
+        System.out.println("------------pre2");
+        tree.preOrder2(root);
+        System.out.println("---------in");
         tree.inOrder(root);
-        System.out.println("---------post");
+        System.out.println("---------noRecPost");
         tree.noRecPostOrder(root);
+        System.out.println("------------postorder");
+        tree.postOrder(root);
 
     }
 }
