@@ -4,25 +4,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
-    public class Node{
-        //Node必须是public,不然放不到list等集合框架里
-        private  Node right=null;
-        private  Node left=null;
-        private Node parent=null;
-        private  int val=0;
-        Node (int val){
-            this.val=val;
+
+    Node root=null;
+    //第二种方法
+    private int preOrder2(Node root){
+        List<Node> stack=new LinkedList<Node>();
+        Node point=root;
+        ((LinkedList<Node>) stack).push(point);
+        while(!stack.isEmpty()){
+            Node temp=((LinkedList<Node>) stack).pop();
+            System.out.println(temp.val);
+            if(temp.right!=null) {((LinkedList<Node>) stack).push(temp.right);}
+            if (temp.left!=null){((LinkedList<Node>) stack).push(temp.left);}
         }
 
-        public Node(Node right, Node left, Node parent, int val) {
-            this.right = right;
-            this.left = left;
-            this.parent = parent;
-            this.val = val;
-        }
-        //判断俩个节点想不想等,是一个比较复杂的问题,因为一个节点的子树可能有很多层
+        return 0;
     }
-    Node root=null;
     public int add(int val){
         if(root==null){
             root=new Node(val);
