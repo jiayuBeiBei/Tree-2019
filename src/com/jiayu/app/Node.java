@@ -1,5 +1,8 @@
 package com.jiayu.app;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Node{
     //Node必须是public,不然放不到list等集合框架里
       Node right=null;
@@ -49,5 +52,19 @@ public class Node{
 
     public void setVal(int val) {
         this.val = val;
+    }
+
+    public int preOrder2(Node root){
+        List<Node> stack=new LinkedList<Node>();
+        Node point=root;
+        ((LinkedList<Node>) stack).push(point);
+        while(!stack.isEmpty()){
+            Node temp=((LinkedList<Node>) stack).pop();
+            System.out.println(temp.val);
+            if(temp.right!=null) {((LinkedList<Node>) stack).push(temp.right);}
+            if (temp.left!=null){((LinkedList<Node>) stack).push(temp.left);}
+        }
+
+        return 0;
     }
 }

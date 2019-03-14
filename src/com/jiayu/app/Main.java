@@ -5,9 +5,14 @@ import java.util.List;
 
 public class Main {
 
-    Node root=null;
+    public Node root=null;
+
+    public Main(Node root) {
+        this.root = root;
+    }
+
     //第二种方法
-    private int preOrder2(Node root){
+    private int preOrder2(){
         List<Node> stack=new LinkedList<Node>();
         Node point=root;
         ((LinkedList<Node>) stack).push(point);
@@ -20,75 +25,37 @@ public class Main {
 
         return 0;
     }
-    public int add(int val){
-        if(root==null){
-            root=new Node(val);
-        }else{
-            //层序查找完全二叉树,返回要加的子节点位置的指针
-            Node last=findBTreeLastNode(root);
-            last=new Node(val);
+    public int add(Node node){
+        List<Node> que=new LinkedList<>();
+        Node point=root;
+        ((LinkedList<Node>) que).offer(point);
+        while(!que.isEmpty()){
+            Node temp=((LinkedList<Node>) que).poll();
+            if(temp.left!=null){
+                ((LinkedList<Node>) que).offer(temp.left);
+            }else {
+                temp.left=node;
+                return 0;
+            }
+            if (temp.right!=null){
+                ((LinkedList<Node>) que).offer(temp.right);
+            }else {
+                temp.right=node;
+                return 0;
+            }
         }
         return 0;
     }
-    public int remove(){
-//      层序查找完全二叉树,返回要删除的子节点位置的指针
-        Node last=removeBTreeLastNode(root);
-        if (last.right!=null){
-            last.right=null;
-        }else {
-            last.left=null;
-        }
-        return 0;
-    }
-    private Node removeBTreeLastNode(Node root){
-        //层序查找完全二叉树要加的子节点的位置
-        List<Node> queue=new LinkedList();
-        queue.add(root);
-        Node temp=null;
-        while(!queue.isEmpty()){
-            temp=queue.remove(0);
-            if (temp==null){return null;}//根本没结点
-            if (temp.left!=null){
-                queue.add(temp.left);
-            }else{
-                return temp;
-            }
-            if (temp.right!=null){
-                queue.add(temp.right);
-            }else {
-                return temp;
-            }
-        }
-        return null;//未知错
-    }
-    private Node findBTreeLastNode(Node root){
-        //层序查找完全二叉树要加的子节点的位置
-        List<Node> queue=new LinkedList();
-        queue.add(root);
-        Node temp=null;
-        while(!queue.isEmpty()){
-            temp=queue.remove(0);
-            if (temp==null){return null;}//根本没结点
-            if (temp.left!=null){
-                queue.add(temp.left);
-            }else{
-                return temp.left;
-            }
-            if (temp.right!=null){
-                queue.add(temp.right);
-            }else {
-                return temp.right;
-            }
-        }
-        return null;//未知错
-    }
+
     public static void main(String[] args) {
-        Main tree=new Main();
-            tree.add(0);
-            tree.add(1);
-            tree.add(2);
-            tree.add(3);
-            tree.remove();
+         Node root=new Node(0);
+        Main tree=new Main(root);
+        root.left=new Node(1);
+         root.right=new Node(2);
+         tree.preOrder2();
+        System.out.println("------------");
+        tree.add(new Node(4));
+         root.preOrder2(root);
         System.out.println("Hello World!");
     }
 }
